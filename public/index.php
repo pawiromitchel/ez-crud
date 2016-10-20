@@ -18,6 +18,16 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     // the route args
     $table = $args['table'];
 
+    // get coloms
+    if (isset($_GET['coloms'])) {
+        // select only the coloms
+        $coloms = $_GET['coloms'];
+        print_r($coloms);
+    } else {
+        // select all
+        $coloms = "*";
+    }
+
     // check if there is a id Parameter
     if(isset($args['id'])){
         $id = $args['id'];
@@ -37,7 +47,7 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     // if the request is a GET request
     // GET data from the table
     if ($request->isGet()){
-        print_r(json_encode(DB::query("SELECT * FROM $table $where $orderBy $sorting", $connector)));
+        print_r(json_encode(DB::query("SELECT $coloms FROM $table $where $orderBy $sorting", $connector)));
     }
 
     // if the request is a POST request
@@ -85,6 +95,7 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
 $app->post('/test/', function($request, $response, $args){
     
 });
+
 // run the application
 $app->run();
 ?>

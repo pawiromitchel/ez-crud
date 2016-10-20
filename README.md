@@ -19,8 +19,11 @@ First of all lets edit the index.php located in the __*/public*__ folder. The fi
 ```
 Method					: GET 
 Route					: http://localhost/{table}
+Select desired coloms	: http://localhost/{table}?coloms={colom1, colom2, etc}
 Order By a Colom		: http://localhost/{table}?orderBy={ColomName}
-Ascending / Descending 	: http://localhost/{table}?orderBy={ColomName}&sorting={asc/desc}
+Ascending / Descending 	: http://localhost/{table}?sorting={asc/desc}
+
+Sample route			: http://localhost/users?coloms=id,firstname&orderBy=id&sorting=desc
 ```
 ### SELECT ByID
 ```
