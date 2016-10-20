@@ -46,3 +46,7 @@ Method	: PUT
 Route	: http://localhost/{table}/{id}
 ```
 
+### TODO
+- Login
+- Search filters
+- Relations
