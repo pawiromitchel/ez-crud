@@ -68,13 +68,18 @@ Route	: http://localhost/{table}/{id}
 ```
 
 ### Filter
+
+#### Types:
+
+- __*eq*__, equal (string or number matches exactly)
+- __*cs*__, contain string (string contains value)
+
 ```
 
 Method	: GET
 Return	: JSON Array
-Route	: http://localhost/{table}?filter[]={colom},eq,{value}
+Route	: http://localhost/{table}?filter[]={colom},{type},{value}
 
 ```
 ### TODO
-- Login
 - Relations

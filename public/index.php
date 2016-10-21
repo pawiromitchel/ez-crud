@@ -22,7 +22,6 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     if (isset($_GET['coloms'])) {
         // select only the coloms
         $coloms = $_GET['coloms'];
-        print_r($coloms);
     } else {
         // select all
         $coloms = "*";
@@ -47,25 +46,35 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     // detect for filter
     if (isset($_GET['filter'])) {
         $filter     = $_GET['filter'];
-        $operator   = "";
-        $clause     = "";
+
         foreach ($filter as $key => $value) {
-            // if the filter_type = equal
-            if (strpos($value, 'eq') && $value !== end($filter)) {
-                $operator = " AND ";
-                $clause= "=";
-            } else {
-                $operator  = "";
-                $clause= "=";
-            }
+
             // take the last word
             $last_word = explode(",", $value);
             $last_word = $last_word[count($last_word)-1];
-            // make the last word as a string
-            $value = str_replace($last_word, "'" . $last_word . "'", $value) . $operator;
+            
+            // change the last word into anything
+            if (strpos($value, 'eq')) {
+                $value = str_replace($last_word, "'" . $last_word . "'", $value) . $operator;
+            } elseif(strpos($value, 'cs')){
+                $value = str_replace($last_word, "'%" . $last_word . "%'", $value) . $operator;
+            }
+            
             // manipulate the string
             $value = str_replace(',', '', $value) . $operator;
-            $value = str_replace('eq', $clause, $value);
+            
+
+            // if the filter_type = equal
+            if (strpos($value, 'eq')) {
+                $clause = "=";
+                $value = str_replace('eq', $clause, $value);
+            }
+
+            // if the filter_type = contain string
+            if (strpos($value, 'cs')) {
+                $clause= " LIKE ";
+                $value = str_replace('cs', $clause, $value);
+            }
 
             $filter_str .= $value;
         }
@@ -75,6 +84,7 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     
     // GET data from the table
     if ($request->isGet()){
+        print_r("SELECT $coloms FROM $table $filter_str $orderBy $sorting");
         $run = DB::query("SELECT $coloms FROM $table $filter_str $orderBy $sorting", $connector);
     }
 
