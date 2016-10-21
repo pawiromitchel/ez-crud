@@ -13,43 +13,68 @@ First of all lets edit the index.php located in the __*/public*__ folder. The fi
 
 `$connector = DB::connect("localhost", "app_database", "root", "");`
 
+### CREATE
+```
 
-### SELECT ALL
+Method	: POST
+Return	: The ID that was inserted 
+Route	: http://localhost/{table}
 
 ```
-Method					: GET 
+### READ ALL
+
+```
+
+Method					: GET
+Return					: JSON Array
 Route					: http://localhost/{table}
 Select desired coloms	: http://localhost/{table}?coloms={colom1, colom2, etc}
-Order By a Colom		: http://localhost/{table}?orderBy={ColomName}
+Order By a Colom		: http://localhost/{table}?orderBy={colom}
 Ascending / Descending 	: http://localhost/{table}?sorting={asc/desc}
 
 Sample route			: http://localhost/users?coloms=id,firstname&orderBy=id&sorting=desc
-```
-### SELECT ByID
-```
-Method	: GET 
-Route	: http://localhost/{table}/{id}
+
 ```
 
-### INSERT
+### READ ByID
 ```
-Method	: POST 
-Route	: http://localhost/{table}
-```
-*Note: that when you post something like __{username: mitchel}__, there must be a colom named __username__!*
-### DELETE
-```
-Method	: DELETE 
+
+Method	: GET
+Return	: JSON Array
 Route	: http://localhost/{table}/{id}
+
+
 ```
+
+*Note: that when you post something like __{username: mitchel}__, there must be a colom named __username__!*'
+
 
 ### UPDATE
 ```
-Method	: PUT 
+
+Method	: PUT
+Return	: 1 or 0
 Route	: http://localhost/{table}/{id}
+
 ```
 
+### DELETE
+```
+
+Method	: DELETE
+Return	: 1 or 0
+Route	: http://localhost/{table}/{id}
+
+```
+
+### Filter
+```
+
+Method	: GET
+Return	: JSON Array
+Route	: http://localhost/{table}?filter[]={colom},eq,{value}
+
+```
 ### TODO
 - Login
-- Search filters
 - Relations
