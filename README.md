@@ -1,4 +1,4 @@
-# PHP CRUD API
+# PHP MYSQL CRUD API
 
 I've made a very special routing system with __*Slim Framework*__ that I want to share.
 
@@ -14,35 +14,36 @@ First of all lets edit the index.php located in the __*/public*__ folder. The fi
 `$connector = DB::connect("localhost", "app_database", "root", "");`
 
 ### CREATE
+Example	: `http://localhost/users`
+
+Body	: `{firstname: mitchel, lastname: pawirodinomo}`
 ```
 
-Method	: POST
-Return	: The ID that was inserted 
-Route	: http://localhost/{table}
+Method		: POST
+Body		: JSON
+Return		: The ID that was inserted 
+Route		: http://localhost/{table}
 
 ```
 ### READ ALL
-
+Example: ` http://localhost/users?coloms=id,username,password&orderBy=id,desc`
 ```
 
 Method					: GET
 Return					: JSON Array
 Route					: http://localhost/{table}
 Select desired coloms	: http://localhost/{table}?coloms={colom1, colom2, etc}
-Order By a Colom		: http://localhost/{table}?orderBy={colom}
-Ascending / Descending 	: http://localhost/{table}?sorting={asc/desc}
-
-Sample route			: http://localhost/users?coloms=id,firstname&orderBy=id&sorting=desc
+Order By a Colom		: http://localhost/{table}?orderBy={colom, asc/desc}
 
 ```
 
 ### READ ByID
+Example: `http://localhost/users/1`
 ```
 
-Method	: GET
-Return	: JSON Array
-Route	: http://localhost/{table}/{id}
-
+Method		: GET
+Return		: JSON Array
+Route		: http://localhost/{table}/{id}
 
 ```
 
@@ -50,15 +51,20 @@ Route	: http://localhost/{table}/{id}
 
 
 ### UPDATE
+Example : `http://localhost/users/6`
+
+Body	: `{firstname: mitchel, lastname: pawirodinomo, username: mitchel, password: yesIamPasswrd}`
 ```
 
-Method	: PUT
-Return	: 1 or 0
-Route	: http://localhost/{table}/{id}
+Method		: PUT
+Body		: JSON
+Return		: 1 or 0
+Route		: http://localhost/{table}/{id}
 
 ```
 
 ### DELETE
+Example: `http://localhost/users/5`
 ```
 
 Method	: DELETE
@@ -66,9 +72,18 @@ Return	: 1 or 0
 Route	: http://localhost/{table}/{id}
 
 ```
+### RELATIONS
+```
 
-### Filter
+Method		: GET
+Return		: JSON
+Route		: http://localhost:8001/{table}?join[]={table_to_join},{colomname1}={colomname2}
 
+```
+
+### FILTERS
+
+Example : `http://localhost/users?filter[]=username,eq,mitchel&filter[]=password,eq,6881insljd`
 #### Types:
 
 - __*eq*__, equal (string or number matches exactly)
@@ -76,10 +91,11 @@ Route	: http://localhost/{table}/{id}
 
 ```
 
-Method	: GET
-Return	: JSON Array
-Route	: http://localhost/{table}?filter[]={colom},{type},{value}
+Method		: GET
+Return		: JSON Array
+Route		: http://localhost/{table}?filter[]={colom},{type},{value}
 
 ```
+
 ### TODO
 - Relations

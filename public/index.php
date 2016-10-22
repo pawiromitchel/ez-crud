@@ -35,12 +35,9 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
 
     // ORDER BY colom_name
     if (isset($_GET['orderBy'])) {
-        $orderBy = 'ORDER BY ' . $_GET['orderBy'];
-    }
-
-    // sorting = DESC or ASC
-    if (isset($_GET['sorting'])) {
-        $sorting = $_GET['sorting'];
+        $orderBy = $_GET['orderBy'];
+        $orderBy = str_replace(',', ' ', $orderBy);
+        $orderBy = 'ORDER BY ' . $orderBy;
     }
 
     // detect for filter
@@ -80,6 +77,20 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
         }
         // make the string into a usable part of a query
         $filter_str = " WHERE " . $filter_str;
+    }
+
+    if (isset($_GET['join'])) {
+        $join = $_GET['join'];
+
+        // print_r($join);
+
+        $filter_str = "";
+        foreach ($join as $key => $value) {
+            $value = str_replace(',', ' ON ', $value) . $operator;
+            $value = str_replace('=', ' = ', $value);
+            // print_r(" INNER JOIN " . $value);
+            $filter_str .= " INNER JOIN " . $value;
+        }
     }
     
     // GET data from the table
