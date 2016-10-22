@@ -96,6 +96,3 @@ Return		: JSON Array
 Route		: http://localhost/{table}?filter[]={colom},{type},{value}
 
 ```
-
-### TODO
-- Relations
