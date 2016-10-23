@@ -1,0 +1,19 @@
+Todo:
+  ✔ CREATE @done (16-10-22 22:12)
+  ✔ READ ALL @done (16-10-22 22:12)
+  ✔ READ byID @done (16-10-22 22:12)
+  ✔ UPDATE @done (16-10-22 22:12)
+  ✔ DELETE @done (16-10-22 22:12)
+  ✔ RELATIONS @done (16-10-22 22:12)
+  ☐ Filters
+    ✔ equal (Usefull for login) @done (16-10-22 22:15)
+    ✔ contains string (Usefull for search) @done (16-10-22 22:15)
+    ☐ greater than
+    ☐ greater or equal
+    ☐ lower than
+    ☐ lower or equal
+  ☐ RELATIONS byID
+
+Future Stuff:
+  ☐ getMaxId
+  ☐ 
