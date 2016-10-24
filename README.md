@@ -7,7 +7,7 @@ First of all lets edit the index.php located in the __*/public*__ folder. The fi
 
 ### The connector class
 
-` DB::connect($host, $tablename, $username, $password);`
+` DB::connect($host, $database_name, $username, $password);`
 
 ### Sample connection 
 
