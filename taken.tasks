@@ -5,7 +5,7 @@ Todo:
   ✔ UPDATE @done (16-10-22 22:12)
   ✔ DELETE @done (16-10-22 22:12)
   ✔ RELATIONS @done (16-10-22 22:12)
-  ☐ Filters
+  ☐ FILTERS
     ✔ equal (Usefull for login) @done (16-10-22 22:15)
     ✔ contains string (Usefull for search) @done (16-10-22 22:15)
     ☐ greater than
@@ -15,5 +15,5 @@ Todo:
   ☐ RELATIONS byID
 
 Future Stuff:
-  ☐ getMaxId
+  ☐ getMaxId of a table
   ☐ 
