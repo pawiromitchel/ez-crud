@@ -5,6 +5,32 @@ I've made a very special routing system with __*Slim Framework*__ that I want to
 ## Connecting to the MySQL database
 First of all lets edit the index.php located in the __*/public*__ folder. The first thing that we want to do is to make a database connection.
 
+## Usage jQuery
+```
+
+$.ajax({
+	type: {GET/POST/PUT/DELETE},
+	url: {url_here},
+	data: {data}
+	success: function(data){
+		data = $.parseJSON(data);
+		// do something with data when successful
+	},
+	fail: function(){
+		// do something when failed
+	}
+});
+
+```
+
+## Usage PHP
+```
+
+$data = json_decode(file_get_contents({url_here}));
+var_dump($data);
+
+```
+
 ### The connector class
 
 ` DB::connect($host, $database_name, $username, $password);`
