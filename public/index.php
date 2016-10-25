@@ -4,13 +4,11 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 $app = new \Slim\App;
 
-// autoload classes
-spl_autoload_register(function($class){
-    require_once "../classes/{$class}.php";
-});
-
 // this is the main route of the application
 $app->any('/{table}[/{id}]', function ($request, $response, $args) {
+
+    // make the database connection
+    include 'database.php';
 
     // connect to the database
     $connector = DB::connect("localhost", "app_nais", "root", "");
@@ -95,7 +93,7 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
     
     // GET data from the table
     if ($request->isGet()){
-        print_r("SELECT $coloms FROM $table $filter_str $orderBy $sorting");
+        // print_r("SELECT $coloms FROM $table $filter_str $orderBy $sorting");
         $run = DB::query("SELECT $coloms FROM $table $filter_str $orderBy $sorting", $connector);
     }
 
@@ -130,13 +128,19 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
         $run = DB::insert("UPDATE FROM $table SET $set_values $where", $connector);
     }
 
-    // run the $run
+    // print the $run
     print_r(json_encode($run));
 });
 
-// for testing out some functions
-$app->post('/test/', function($request, $response, $args){
-    
+// for custom query
+$app->post('/custom_query/', function($request, $response, $args){
+    $sql = $_POST['sql'];
+    // make the database connection
+    include 'database.php';
+    // the query
+    $run = DB::query($sql, $connector);
+    // return something
+    print_r(json_encode($run));
 });
 
 // run the application
