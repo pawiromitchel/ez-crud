@@ -1,4 +1,4 @@
-Todo:
+Todo API:
   ✔ CREATE @done (16-10-22 22:12)
   ✔ READ ALL @done (16-10-22 22:12)
   ✔ READ byID @done (16-10-22 22:12)
@@ -14,6 +14,7 @@ Todo:
     ☐ lower or equal
   ☐ RELATIONS byID
 
-Future Stuff:
-  ☐ getMaxId of a table
-  ☐ 
+Todo UI:
+ ☐ Display tables
+ ☐ Display the routes of the table
+ ☐ generate a page with CRUD functions

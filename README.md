@@ -24,13 +24,19 @@ $.ajax({
 ```
 
 ## Usage PHP
+
+### GET Method
 ```
 
-// GET method
 $data = json_decode(file_get_contents({url_here}));
 var_dump($data);
 
-// POST method
+
+```
+
+### POST | PUT | DELETE Method
+```
+
 $postdata = http_build_query(
     array(
         'var1' => 'some content',
@@ -50,12 +56,11 @@ $context  = stream_context_create($opts);
 $result = file_get_contents({url_here}, false, $context);
 
 ```
-
 ### The connector class
 
 ` DB::connect($host, $database_name, $username, $password);`
 
-### Sample connection 
+### Sample connection
 
 `$connector = DB::connect("localhost", "app_database", "root", "");`
 
@@ -67,7 +72,7 @@ Body	: `{firstname: mitchel, lastname: pawirodinomo}`
 
 Method		: POST
 Body		: JSON
-Return		: The ID that was inserted 
+Return		: The ID that was inserted
 Route		: http://localhost/{table}
 
 ```
