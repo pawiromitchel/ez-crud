@@ -59,15 +59,18 @@
                                                     <th>Name</th>\
                                                     <th>Method</th>\
                                                     <th>Route</th>\
-                                                    <th>Body</th>\
                                                 </tr>\
                                             </thead>\
                                             <tbody>\
                                                 <tr>\
-                                                    <td>Read All</td>\
+                                                    <td><button type="button" class="btn btn-success btn-xs">Read All</td>\
                                                     <td>GET</td>\
-                                                    <td>'+ location.protocol + "//" + window.location.hostname +'/php-crud-api/public/'+value.TABLE_NAME+'</td>\
-                                                    <td>-</td>\
+                                                    <td>'+ location.protocol + "//" + window.location.hostname +'/ez-crud/public/'+value.TABLE_NAME+'</td>\
+                                                </tr>\
+                                                <tr>\
+                                                    <td><button type="button" class="btn btn-success btn-xs">Read ByID</td>\
+                                                    <td>GET</td>\
+                                                    <td>'+ location.protocol + "//" + window.location.hostname +'/ez-crud/public/'+value.TABLE_NAME+'/1</td>\
                                                 </tr>\
                                             </tbody>\
                                         </table>\

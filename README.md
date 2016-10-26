@@ -26,8 +26,28 @@ $.ajax({
 ## Usage PHP
 ```
 
+// GET method
 $data = json_decode(file_get_contents({url_here}));
 var_dump($data);
+
+// POST method
+$postdata = http_build_query(
+    array(
+        'var1' => 'some content',
+        'var2' => 'doh'
+    )
+);
+
+$opts = array('http' =>
+    array(
+        'method'  => 'POST',
+        'header'  => 'Content-type: application/x-www-form-urlencoded',
+        'content' => $postdata
+    )
+);
+
+$context  = stream_context_create($opts);
+$result = file_get_contents({url_here}, false, $context);
 
 ```
 
