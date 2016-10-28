@@ -12,7 +12,7 @@ Todo API:
     ☐ greater or equal
     ☐ lower than
     ☐ lower or equal
-  ☐ RELATIONS byID
+  ✔ RELATIONS byID @done (16-10-28 14:54)
 
 Todo UI:
  ☐ Display tables
