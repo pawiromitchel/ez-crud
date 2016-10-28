@@ -47,17 +47,16 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
             // take the last word
             $last_word = explode(",", $value);
             $last_word = $last_word[count($last_word)-1];
-            
+
             // change the last word into anything
             if (strpos($value, 'eq')) {
                 $value = str_replace($last_word, "'" . $last_word . "'", $value) . $operator;
             } elseif(strpos($value, 'cs')){
                 $value = str_replace($last_word, "'%" . $last_word . "%'", $value) . $operator;
             }
-            
+
             // manipulate the string
             $value = str_replace(',', '', $value) . $operator;
-            
 
             // if the filter_type = equal
             if (strpos($value, 'eq')) {
@@ -71,10 +70,10 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
                 $value = str_replace('cs', $clause, $value);
             }
 
-            $filter_str .= $value;
+            $where_str .= $value;
         }
         // make the string into a usable part of a query
-        $filter_str = " WHERE " . $filter_str;
+        $where_str = " WHERE " . $where_str;
     }
 
     if (isset($_GET['join'])) {
@@ -90,11 +89,11 @@ $app->any('/{table}[/{id}]', function ($request, $response, $args) {
             $filter_str .= " INNER JOIN " . $value;
         }
     }
-    
+
     // GET data from the table
     if ($request->isGet()){
         // print_r("SELECT $coloms FROM $table $filter_str $orderBy $sorting");
-        $run = DB::query("SELECT $coloms FROM $table $filter_str $orderBy $sorting", $connector);
+        $run = DB::query("SELECT $coloms FROM $table $filter_str $where_str $orderBy $sorting", $connector);
     }
 
     // INSERT a new row
