@@ -7,6 +7,27 @@ I've made a very special routing system with
 ## Connecting to the MySQL database
 First of all lets edit the index.php located in the __*/public*__ folder. The first thing that we want to do is to make a database connection.
 
+### The connector class (public/config.php)
+
+```
+$config = array(
+        'driver'    => 'mysql', // Db driver
+        'host'      => 'localhost',
+        'database'  => 'app_nais',
+        'username'  => 'root',
+        'password'  => '',
+        // 'charset'   => 'utf8', // Optional
+        // 'collation' => 'utf8_unicode_ci', // Optional
+        // 'prefix'    => 'cb_', // Table prefix, optional
+        'options'   => array( // PDO constructor options, optional
+            PDO::ATTR_TIMEOUT => 5,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ),
+    );
+
+new \Pixie\Connection('mysql', $config, 'DB');
+```
+
 ## Usage jQuery
 ```
 
@@ -58,30 +79,6 @@ $context  = stream_context_create($opts);
 $result = file_get_contents({url_here}, false, $context);
 
 ```
-### The connector class (public/config.php)
-
-```
-$config = array(
-        'driver'    => 'mysql', // Db driver
-        'host'      => 'localhost',
-        'database'  => 'app_nais',
-        'username'  => 'root',
-        'password'  => '',
-        // 'charset'   => 'utf8', // Optional
-        // 'collation' => 'utf8_unicode_ci', // Optional
-        // 'prefix'    => 'cb_', // Table prefix, optional
-        'options'   => array( // PDO constructor options, optional
-            PDO::ATTR_TIMEOUT => 5,
-            PDO::ATTR_EMULATE_PREPARES => false,
-        ),
-    );
-
-new \Pixie\Connection('mysql', $config, 'DB');
-```
-
-### Sample connection
-
-`$connector = DB::connect("localhost", "app_database", "root", "");`
 
 ### CREATE
 Example	: `http://localhost/users`
