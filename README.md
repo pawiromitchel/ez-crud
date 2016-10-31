@@ -1,6 +1,8 @@
 # PHP MYSQL CRUD API
 
-I've made a very special routing system with __*Slim Framework*__ that I want to share.
+I've made a very special routing system with 
+- __*Slim Framework*__ <a href="http://www.slimframework.com/docs/">http://www.slimframework.com/docs/<a>
+- __*Pixie Query Builder*__ <a href="https://github.com/usmanhalalit/pixie">https://github.com/usmanhalalit/pixie<a>
 
 ## Connecting to the MySQL database
 First of all lets edit the index.php located in the __*/public*__ folder. The first thing that we want to do is to make a database connection.
@@ -56,9 +58,26 @@ $context  = stream_context_create($opts);
 $result = file_get_contents({url_here}, false, $context);
 
 ```
-### The connector class
+### The connector class (public/config.php)
 
-` DB::connect($host, $database_name, $username, $password);`
+```
+$config = array(
+        'driver'    => 'mysql', // Db driver
+        'host'      => 'localhost',
+        'database'  => 'app_nais',
+        'username'  => 'root',
+        'password'  => '',
+        // 'charset'   => 'utf8', // Optional
+        // 'collation' => 'utf8_unicode_ci', // Optional
+        // 'prefix'    => 'cb_', // Table prefix, optional
+        'options'   => array( // PDO constructor options, optional
+            PDO::ATTR_TIMEOUT => 5,
+            PDO::ATTR_EMULATE_PREPARES => false,
+        ),
+    );
+
+new \Pixie\Connection('mysql', $config, 'DB');
+```
 
 ### Sample connection
 
@@ -83,8 +102,6 @@ Example: ` http://localhost/users?coloms=id,username,password&orderBy=id,desc`
 Method					: GET
 Return					: JSON Array
 Route					: http://localhost/{table}
-Select desired coloms	: http://localhost/{table}?coloms={colom1, colom2, etc}
-Order By a Colom		: http://localhost/{table}?orderBy={colom, asc/desc}
 
 ```
 
@@ -121,29 +138,5 @@ Example: `http://localhost/users/5`
 Method	: DELETE
 Return	: 1 or 0
 Route	: http://localhost/{table}/{id}
-
-```
-### RELATIONS
-```
-
-Method		: GET
-Return		: JSON
-Route		: http://localhost:8001/{table}?join[]={table_to_join},{colomname1}={colomname2}
-
-```
-
-### FILTERS
-
-Example : `http://localhost/users?filter[]=username,eq,mitchel&filter[]=password,eq,6881insljd`
-#### Types:
-
-- __*eq*__, equal (string or number matches exactly)
-- __*cs*__, contain string (string contains value)
-
-```
-
-Method		: GET
-Return		: JSON Array
-Route		: http://localhost/{table}?filter[]={colom},{type},{value}
 
 ```
